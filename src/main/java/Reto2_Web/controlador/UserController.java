@@ -31,31 +31,55 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
     @Autowired
     private UserService userService;
-     
+     /**
+      * 
+      * @return userService
+      */
      @GetMapping("/all")
     public List<User> getAll() {
         return userService.getAll();
     }
+    
       @PostMapping("/new")
     @ResponseStatus(HttpStatus.CREATED)
     public User create(@RequestBody User user) {
         return userService.create(user);
     }
-    
+    /**
+     * 
+     * @param user
+     * @return 
+     */
     @PutMapping("/update")
     @ResponseStatus(HttpStatus.CREATED)
     public User update(@RequestBody User user) {
         return userService.update(user);
     }
+    /**
+     * 
+     * @param id
+     * @return 
+     */
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public boolean delete(@PathVariable("id") int id) {
         return userService.delete(id);
     }
+    /**
+     * 
+     * @param email
+     * @param password
+     * @return 
+     */
     @GetMapping("/{email}/{password}")
     public User authenticateUser(@PathVariable("email") String email, @PathVariable("password") String password) {
         return userService.authenticateUser(email, password);
     }
+    /**
+     * 
+     * @param email
+     * @return 
+     */
       @GetMapping("/emailexist/{email}")
     public boolean emailExists(@PathVariable("email") String email) {
         return userService.emailExists(email);
